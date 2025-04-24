@@ -39,15 +39,15 @@ function UsuarioController() {
     try {
       const { nome, email, senha } = req.body;
   
-  
-      if (!nome || !email || !senha ) {
+      if (!nome || !email || !senha) {
         return res.status(400).json({ error: 'Nome, email, senha são obrigatórios.' });
       }
   
+      // Envie a senha pura, o hash será feito no repository
       const usuario = await usuariosRepository.criarUsuario({
-        nome, 
-        email, 
-        senha: await bcrypt.hash(senha, 10), 
+        nome,
+        email,
+        senha
       });
   
       res.json({ message: `Usuário ${nome} cadastrado com sucesso!` });
@@ -56,6 +56,7 @@ function UsuarioController() {
       res.status(500).json({ errorMessage: 'Erro ao cadastrar usuário', error: error.message });
     }
   }
+  
 
   async function logar(req, res) {
     try {
