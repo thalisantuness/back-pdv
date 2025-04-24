@@ -43,7 +43,7 @@ function UsuarioController() {
         return res.status(400).json({ error: 'Nome, email, senha são obrigatórios.' });
       }
   
-      // Envie a senha pura, o hash será feito no repository
+      // Envie a senha pura, o hash será feito no repository aqui
       const usuario = await usuariosRepository.criarUsuario({
         nome,
         email,
